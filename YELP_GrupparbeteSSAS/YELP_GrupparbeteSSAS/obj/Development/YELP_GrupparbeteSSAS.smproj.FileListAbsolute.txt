@@ -1,0 +1,7 @@
+c:\users\gerge\source\repos\YELP_GrupparbeteSSAS\YELP_GrupparbeteSSAS\bin\Model.asdatabase
+c:\users\gerge\source\repos\YELP_GrupparbeteSSAS\YELP_GrupparbeteSSAS\bin\Model.deploymenttargets
+c:\users\gerge\source\repos\YELP_GrupparbeteSSAS\YELP_GrupparbeteSSAS\bin\Model.deploymentoptions
+c:\users\gerge\source\repos\YELP_GrupparbeteSSAS\YELP_GrupparbeteSSAS\obj\Development\YELP_GrupparbeteSSAS.smproj.CoreCompileInputs.cache
+c:\users\gerge\source\repos\YELP_GrupparbeteSSAS\YELP_GrupparbeteSSAS\obj\Development\Model.asdatabase
+c:\users\gerge\source\repos\YELP_GrupparbeteSSAS\YELP_GrupparbeteSSAS\obj\Development\Model.deploymentoptions
+c:\users\gerge\source\repos\YELP_GrupparbeteSSAS\YELP_GrupparbeteSSAS\obj\Development\Model.deploymenttargets

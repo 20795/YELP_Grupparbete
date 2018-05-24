@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "YELP_Grupparbete", "YELP_Grupparbete\YELP_Grupparbete.dtproj", "{E7E7ECA6-03D2-4487-87CF-6C62B0220826}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7E7ECA6-03D2-4487-87CF-6C62B0220826}.Development|Default.ActiveCfg = Development
+		{E7E7ECA6-03D2-4487-87CF-6C62B0220826}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0AD166DA-46D8-44A7-B9C2-824D346CA492}
+	EndGlobalSection
+EndGlobal

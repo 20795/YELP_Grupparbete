@@ -1,0 +1,251 @@
+{
+  "name": "YELP_GrupparbeteSSAS",
+  "compatibilityLevel": 1200,
+  "model": {
+    "culture": "sv-SE",
+    "dataSources": [
+      {
+        "name": "SqlServer localhost YELP_DW",
+        "connectionString": "Provider=SQLNCLI11;Data Source=localhost;Initial Catalog=YELP_DW;Integrated Security=SSPI;Persist Security Info=false",
+        "impersonationMode": "impersonateAccount",
+        "account": "gerge",
+        "annotations": [
+          {
+            "name": "ConnectionEditUISource",
+            "value": "SqlServer"
+          }
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "name": "Business",
+        "columns": [
+          {
+            "name": "BusinessID",
+            "dataType": "string",
+            "sourceColumn": "BusinessID",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Name",
+            "dataType": "string",
+            "sourceColumn": "Name",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Neighborhood",
+            "dataType": "string",
+            "sourceColumn": "Neighborhood",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "ReviewCount",
+            "dataType": "int64",
+            "sourceColumn": "ReviewCount",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "IsOpen",
+            "dataType": "boolean",
+            "sourceColumn": "IsOpen",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "Boolean"
+          },
+          {
+            "name": "Longitude",
+            "dataType": "double",
+            "sourceColumn": "Longitude",
+            "sourceProviderType": "Double"
+          },
+          {
+            "name": "Latitude",
+            "dataType": "double",
+            "sourceColumn": "Latitude",
+            "sourceProviderType": "Double"
+          },
+          {
+            "name": "Stars",
+            "dataType": "double",
+            "sourceColumn": "Stars",
+            "sourceProviderType": "Double"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Business",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [dbo].[Business].* FROM [dbo].[Business] ",
+              "dataSource": "SqlServer localhost YELP_DW"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[Business].* FROM [dbo].[Business] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Business"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Review",
+        "columns": [
+          {
+            "name": "ReviewID",
+            "dataType": "string",
+            "sourceColumn": "ReviewID",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "BusinessID",
+            "dataType": "string",
+            "sourceColumn": "BusinessID",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Stars",
+            "dataType": "int64",
+            "sourceColumn": "Stars",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Date",
+            "formatString": "General Date",
+            "sourceProviderType": "DBDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Review",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [dbo].[Review].* FROM [dbo].[Review] ",
+              "dataSource": "SqlServer localhost YELP_DW"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "AverageStars",
+            "expression": "AVERAGE(Review[Stars])"
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[Review].* FROM [dbo].[Review] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Review"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "DateDim",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Date",
+            "dataType": "dateTime",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Date]"
+          },
+          {
+            "type": "calculated",
+            "name": "Year",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "expression": "YEAR('DateDim'[Date])"
+          },
+          {
+            "type": "calculated",
+            "name": "Month",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "expression": "MONTH(DateDim[Date])"
+          },
+          {
+            "type": "calculated",
+            "name": "Day",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "expression": "DAY(DateDim[Date])"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CalculatedTable 1",
+            "source": {
+              "type": "calculated",
+              "expression": "CALENDAR(MIN(Review[Date]),MAX(Review[Date]))"
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Hierarchy1",
+            "levels": [
+              {
+                "name": "Year",
+                "ordinal": 0,
+                "column": "Year"
+              },
+              {
+                "name": "Month",
+                "ordinal": 1,
+                "column": "Month"
+              },
+              {
+                "name": "Day",
+                "ordinal": 2,
+                "column": "Day"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "534ced62-04bf-43c6-9d84-742fe840b500",
+        "fromTable": "Review",
+        "fromColumn": "BusinessID",
+        "toTable": "Business",
+        "toColumn": "BusinessID"
+      },
+      {
+        "name": "131fc82d-bcb0-462b-be49-d11c7cc3c2b2",
+        "fromTable": "Review",
+        "fromColumn": "Date",
+        "toTable": "DateDim",
+        "toColumn": "Date"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "400"
+      }
+    ]
+  }
+}
